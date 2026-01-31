@@ -1,0 +1,62 @@
+menu = {
+    'Pizza': 120,
+    'Burger': 80,
+    'Salad': 40,
+    'Coffe': 25,
+    'Sihab': 0.2 # Coupon for 20% discount
+}
+
+print("🍽️ Welcome to Our Restaurant!")
+print("Here's our menu:\n")
+
+for item, price in menu.items():
+    if item != "Sihab":
+        print(f"{item}: ₹{price}")
+print("\n------------------------------")
+
+# First order
+Order1 = input("📝 What would you like to order?: ").strip().title()
+
+if Order1 not in menu or Order1 == "Sihab":
+    print("❌ Invalid item. Please select a valid item from the menu.")
+    exit()
+
+print(f"✅ {Order1} added to your order. Price: ₹{menu[Order1]}")
+
+# Ask for more orders
+more = input("➕ Do you want to order more? (Yes/No): ").strip().lower()
+
+if Order1 == "Coffe" and more == "no":
+    print("⚠️ Sorry, you can't order just a coffee.")
+    print("🙏 Thank you for visiting!")
+    exit()
+
+elif more == "no":
+    print(f"💰 Your total bill is: ₹{menu[Order1]}")
+    print("🙏 Thank you for ordering!")
+    exit()
+
+# Second order
+Order2 = input("📝 Enter your second item: ").strip().title()
+
+if Order2 not in menu or Order2 == "Sihab":
+    print("❌ Invalid item. Please select a valid item from the menu.")
+    exit()
+
+print(f"✅ {Order2} added to your order. Price: ₹{menu[Order2]}")
+
+# Calculate total
+total_bill = menu[Order1] + menu[Order2]
+
+# Check for coupon
+coupon = input("🎁 Do you have a coupon code? If yes, enter it: ").strip().title()
+
+if coupon == "Sihab":
+    discount = total_bill * menu["Sihab"]
+    final_bill = total_bill - discount
+    print(f"✅ 20% coupon applied. You saved ₹{discount:.2f}")
+    print(f"💰 Your final bill is: ₹{final_bill:.2f}")
+else:
+    print(f"💰 Your total bill is: ₹{total_bill}")
+
+print("🙏 Thank you for ordering with us!")
